@@ -1,0 +1,40 @@
+---
+title: "myopia"
+author: "Tim"
+date: "1/3/2022"
+output: html_document
+---
+
+```{r}
+if (!require("car")) install.packages("car")
+library(car)
+if (!require("carData")) install.packages("carData")
+library(carData)
+if (!require("tidyr")) install.packages("tidyr")
+library(tidyr)
+
+if (!require("ggplot2")) install.packages("ggplot2")
+library(ggplot2)
+myopia<- read.csv("https://raw.githubusercontent.com/Kakashi-sensei/myopia/main/Book1.csv", header=TRUE)
+
+myopialong<- gather(myopia, eyes, measurement, BOD:A1yearall, factor_key=T)
+
+t.test(myopia$B3monthOD, myopia$BOD,var.equal=TRUE,alternative = 'greater')
+t.test(myopia$B3monthOS, myopia$BOS,var.equal=TRUE,alternative = 'greater')
+t.test(myopia$B3mall, myopia$Ball,var.equal=TRUE,alternative = 'greater')
+t.test(myopia$B1yearOD, myopia$BOD,var.equal=TRUE,alternative = 'greater')
+t.test(myopia$B1yearOS, myopia$BOS,var.equal=TRUE,alternative = 'greater')
+t.test(myopia$B1yall, myopia$Ball,var.equal=TRUE,alternative = 'greater')
+
+
+t.test(myopia$A3monthOD, myopia$AOD,var.equal=TRUE,alternative = 'greater')
+t.test(myopia$A3monthOS, myopia$AOS,var.equal=TRUE,alternative = 'greater')
+t.test(myopia$A3mall, myopia$Aall,var.equal=TRUE,alternative = 'greater')
+t.test(myopia$A1yearOD, myopia$AOD,var.equal=TRUE,alternative = 'greater')
+t.test(myopia$A1yearOS, myopia$AOS,var.equal=TRUE,alternative = 'greater')
+t.test(myopia$A1yearall, myopia$Aall,var.equal=TRUE,alternative = 'greater')
+
+outpath <- "c:/Users/46554/github/R/myopia/"
+write.csv(myopialong, file="myopialong.csv", row.names = F)
+```
+
